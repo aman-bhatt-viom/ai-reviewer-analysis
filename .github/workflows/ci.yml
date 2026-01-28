@@ -17,4 +17,4 @@ jobs:
           java-version: "21"
           cache: "maven"
       - name: Build and test
-        run: mvn -B test
+        run: mvn -B test --file pom.xml
