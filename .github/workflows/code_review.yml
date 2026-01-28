@@ -22,6 +22,7 @@ jobs:
           CODE_REVIEWER_GITHUB_ACCESS_TOKEN: ${{ secrets.CODE_REVIEWER_GITHUB_ACCESS_TOKEN }}
           AI_CODE_REVIEW_PROJECT: ${{ secrets.AI_CODE_REVIEW_PROJECT }}
           CURRENT_REPO_ACCESS_GIT_URL: ${{ secrets.CURRENT_REPO_ACCESS_GIT_URL }}
+        run: |
           cp -r ./ai-code-reviewer/run_code_review.sh .
           chmod +x ./run_code_review.sh
           ./run_code_review.sh
