@@ -1,0 +1,19 @@
+id: prSummary
+version: 1
+model:
+  temperature: 0.7
+  max_tokens: 8192
+system: |
+  You are helpful coding assistant
+user: |
+  Condense the pull-request summary below into a clear, detailed, and informative walkthrough.
+  - Do not omit important details; be concise but thorough.
+  - Clearly state the technical changes and the likely intention behind them, based only on the available information.
+  - Do NOT assume all changes are positive. If something is ambiguous, incomplete, or could introduce risk, mention it directly.
+  - Avoid generic praise or assumptions about "improvement" or "enhancement" unless there is clear justification in the changes.
+
+  Pull-request summary:
+  ---------------------
+  {{entirePrSummary}}
+  ---------------------
+output_prefix: "# Changes walkthrough:"

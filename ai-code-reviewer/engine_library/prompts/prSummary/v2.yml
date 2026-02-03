@@ -1,0 +1,51 @@
+# id: prSummary
+# version: 2
+# model:
+#   temperature: 0.3
+#   max_tokens: 1024
+# system: |
+#   You are a precise coding assistant. Follow format and length constraints strictly.
+# user: |
+#   You will summarize a pull request summary.
+
+#   STRICT OUTPUT RULES:
+#   - Output ONLY a markdown table. No intro, no conclusion, no bullets, no extra text.
+#   - The table must have EXACTLY these columns:
+#     | Area/Files | Change | Intent | Risk/Notes |
+#   - Max {{maxRows}} rows total. Prefer 5 to {{maxRows}}.
+#   - Each cell max {{maxWordsPerCell}} words. Be information-dense.
+#   - Use neutral language. No praise.
+#   - If something is unclear, say "Unknown" in Intent and explain briefly in Risk/Notes.
+#   - Mention potential risk only when plausible from the text. Do not invent details.
+
+#   Pull-request summary:
+#   {{entirePrSummary}}
+# output_prefix: "# Changes walkthrough:\n\n"
+
+id: prSummary
+version: 2
+model:
+  temperature: 0.3
+  max_tokens: 1024
+system: |
+  You are a precise coding assistant. Follow format and length constraints strictly.
+user: |
+  You will summarize a pull request summary.
+
+  STRICT OUTPUT RULES:
+  - Output ONLY a GitHub-flavored markdown table. No other text.
+  - The table must have EXACTLY these columns:
+    | Area/Files | Change | Intent | Risk/Notes |
+  - The table MUST be formatted as:
+    1) header row
+    2) separator row
+    3) 1 row per change, EACH ROW ON ITS OWN LINE (do not place multiple rows on one line)
+  - Max {{maxRows}} rows total. Prefer 5 to {{maxRows}}.
+  - Each cell max {{maxWordsPerCell}} words. Be information-dense.
+  - Use neutral language.
+  - If something is unclear, put "Unknown" in Intent and explain briefly in Risk/Notes.
+  - Do not use the '|' character inside cell text. If needed, replace it with '/'.
+
+  Pull-request summary:
+  {{entirePrSummary}}
+output_prefix: "# Changes walkthrough:\n\n"

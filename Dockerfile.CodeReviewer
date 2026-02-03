@@ -1,0 +1,21 @@
+# Use the official Node.js 18 image as the base image
+FROM node:18
+
+# Set the working directory in the container to /app
+WORKDIR /app
+
+# Install sshpass
+RUN apt-get update && apt-get install -y sshpass
+
+COPY . /app
+
+# Install sonarqube-scanner globally
+RUN npm install -g sonarqube-scanner@4.2.3
+
+# Navigate to the ai-code-reviewer directory and install dependencies
+WORKDIR /app/ai-code-reviewer
+RUN npm install
+
+# Run the command to start the application when the container starts
+# CMD ["node", "lib/main.js"]
+CMD ["node", "engine_library/main.js"]

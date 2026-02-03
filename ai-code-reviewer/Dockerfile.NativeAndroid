@@ -1,0 +1,39 @@
+FROM PLACEHOLDER
+
+# Build arguments for flexibility
+ARG JAVA_VERSION=17
+
+# Set the working directory
+WORKDIR /app
+
+COPY . /app
+
+# Change Java version
+RUN jenv global $JAVA_VERSION
+
+# Install sshpass
+RUN apt-get update && apt-get install -y sshpass
+
+# 🚨 IMP: Set up the environment variables
+# ENV GRADLE_OPTS="-Xmx512m -XX:MaxMetaspaceSize=256m -Dorg.gradle.daemon=false -Dorg.gradle.jvmargs=-Xms256m"
+
+# Set the working directory
+WORKDIR /app
+
+COPY . /app
+
+# 🚨 Create local.properties with the Android SDK path
+# RUN echo "sdk.dir=$ANDROID_HOME" > /app/local.properties
+
+# 🚨 Install sonarqube-scanner globally
+# RUN npm install -g sonarqube-scanner@4.2.3
+
+# Navigate to the ai-code-reviewer directory and install dependencies
+WORKDIR /app/ai-code-reviewer
+
+# Install the AI Code reviewer dependencies
+RUN npm install
+
+# Run the command to start the application when the container starts
+# CMD ["node", "lib/main.js"]
+CMD ["node", "engine_library/main.js"]
